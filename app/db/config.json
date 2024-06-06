@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "xxx",
+    "password": "xx",
+    "database": "xxx",
+    "host": "xx",
+    "dialect": "xxx"
+  }
+}
