@@ -11,4 +11,11 @@ const index = async (req, res) => {
   }
 };
 
-module.exports = { index };
+const create = async (req, res) => {
+  try {
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { index, create };

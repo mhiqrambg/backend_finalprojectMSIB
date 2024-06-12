@@ -31,7 +31,7 @@ const Products = sequelize.define(
     },
     update_by: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     createdate: {
       type: DataTypes.DATE,

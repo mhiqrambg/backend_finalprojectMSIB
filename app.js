@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 const categoriesRouter = require('./app/api/v1/categories/router');
 const usersRouter = require('./app/api/v1/users/router');
 const productsRouter = require('./app/api/v1/products/router');
+// const loginRouter = require('./app/api/v1/login/router');
 
 const v1 = '/api/v1/cms';
 app.use(logger('dev'));
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(v1, categoriesRouter);
+// app.use(v1, loginRouter);
 app.use(v1, usersRouter);
 app.use(v1, productsRouter);
 module.exports = app;
