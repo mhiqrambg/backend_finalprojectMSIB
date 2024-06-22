@@ -5,6 +5,6 @@ const { signIn, signupUser, updateProfile } = require('./controller');
 router.post('/signup', signupUser);
 router.post('/signin', signIn);
 router.put('/signin', signIn);
-router.put('/signin/:username', updateProfile);
+router.put('/profile/:username', updateProfile);
 
 module.exports = router;

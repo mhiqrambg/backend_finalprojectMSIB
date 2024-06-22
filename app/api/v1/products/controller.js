@@ -2,13 +2,21 @@ const Products = require('./model');
 
 const createProduct = async (req, res) => {
   const { name, qty, category_id, url_image, created_by } = req.body;
+
+  if (!name || !qty || !category_id || !url_image || !created_by) {
+    return res.status(400).json({
+      message: 'Semua field harus diisi',
+    });
+  }
+
   try {
     const duplikatProduct = await Products.findOne({
-      where: { qty, name, url_image, category_id },
+      where: { name, category_id },
     });
+
     if (duplikatProduct) {
       return res.status(400).json({
-        message: 'Duplikat data',
+        message: 'Produk dengan nama dan kategori yang sama sudah ada',
       });
     }
 
@@ -19,23 +27,27 @@ const createProduct = async (req, res) => {
       url_image,
       created_by,
     });
-    res.status(201).json({
+
+    return res.status(201).json({
       data: result,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    return res.status(500).json({
+      message: 'Terjadi kesalahan pada server',
+    });
   }
 };
+
 const getAllProducts = async (req, res) => {
   try {
     const result = await Products.findAll();
     res.status(200).json({
-      data: result,
+      result,
     });
   } catch (err) {
     res.status(500).json({
-      message: 'Error retrieving products',
-      err,
+      message: err,
     });
   }
 };
