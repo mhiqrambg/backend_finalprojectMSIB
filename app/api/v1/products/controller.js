@@ -1,7 +1,7 @@
 const Products = require('./model');
 
 const createProduct = async (req, res) => {
-  const { name, qty, category_id, url_image, created_by } = req.body;
+  const { name, qty, category_id, url_image, created_by, update_by } = req.body;
 
   if (!name || !qty || !category_id || !url_image || !created_by) {
     return res.status(400).json({
@@ -26,6 +26,7 @@ const createProduct = async (req, res) => {
       category_id,
       url_image,
       created_by,
+      update_by,
     });
 
     return res.status(201).json({
@@ -76,11 +77,12 @@ const updateProduct = async (req, res) => {
 
   //cek data kosong
   if (!name || !qty || !category_id || !update_by) {
-    return res.status(404).json({ message: 'Data kosong' });
+    return res.status(404).json({ message: 'Data tidak boleh kosong' });
   }
 
   try {
     const data = await Products.findByPk(id);
+
     if (!data) {
       return res.status(404).json({
         message: 'Data kosong',

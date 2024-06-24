@@ -34,7 +34,7 @@ const signIn = async (req, res) => {
 const signupUser = async (req, res) => {
   const { username, password, image } = req.body;
   try {
-    if (!password) {
+    if (!password || !username) {
       return res.status(401).json({
         message: 'Username atau Password tidak valid',
       });
@@ -43,7 +43,7 @@ const signupUser = async (req, res) => {
     const check = await User.findOne({ where: { username } });
     if (check) {
       return res.status(400).json({
-        message: 'Username dan Password sudah ada',
+        message: 'Username sudah ada',
       });
     }
 
